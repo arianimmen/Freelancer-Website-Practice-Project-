@@ -1,5 +1,5 @@
 function App() {
-  return <div className="bg-red-200 p-3">Staring the Project</div>;
+  return <div className="bg-primary-100 p-3 container">شروع پروژه</div>;
 }
 
 export default App;
