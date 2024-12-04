@@ -8,6 +8,27 @@
   --primary-900: 20 33 32;
 }
 
+@layer components {
+  .textField__input {
+    @apply w-full py-3 px-4 rounded-xl text-secondary-900 border border-gray-300 hover:border-primary-500 focus:outline-none focus:border-primary-500 outline-none  focus:bg-white transition-all duration-300 ease-in-out focus:shadow-lg focus:shadow-primary-200;
+  }
+  .btn {
+    @apply px-3 py-1  font-bold rounded-xl transition-all duration-300;
+  }
+  .btn--primary {
+    @apply px-3 py-4 bg-primary-900 text-secondary-100 hover:bg-primary-800 shadow-lg shadow-primary-300;
+  }
+  .btn--secondary {
+    @apply bg-secondary-500 text-secondary-100;
+  }
+  .badge {
+  }
+  .badge--primary {
+  }
+  .badge--secondary {
+  }
+}
+
 @layer base {
   :root {
     --background-app-rgb: 255, 255, 255;
@@ -48,7 +69,7 @@ body {
   min-height: 100vh;
   user-select: none;
   background-color: rgb(var(--background-app-rgb));
-} 
+}
 
 * {
   box-sizing: border-box;
@@ -113,4 +134,6 @@ table td {
   color: rgb(var(--color-secondary-600));
 }
 
-/*  react tag input */
+label {
+  display: block;
+}
