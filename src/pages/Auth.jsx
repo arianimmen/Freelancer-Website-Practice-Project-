@@ -1,9 +1,9 @@
-import SendOTPForm from "../features/authentication/SendOTPForm";
+import AuthContainer from "../features/authentication/AuthContainer";
 
 function Auth() {
   return (
-    <div className="w-full sm:max-w-sm">
-      <SendOTPForm />
+    <div className="flex justify-center pt-10">
+      <AuthContainer />
     </div>
   );
 }
