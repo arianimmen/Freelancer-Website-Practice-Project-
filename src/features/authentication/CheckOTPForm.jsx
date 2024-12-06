@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { HiArrowRight } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
+import Loading from "../../ui/Loading";
 
 const RESEND_TIME = 90;
 
@@ -23,15 +24,14 @@ function CheckOTPForm({ phoneNumber, onBack, onReSendOtp, otpResponse }) {
       const { message, user } = await mutateAsync({ otp, phoneNumber });
       toast.success(message);
 
-      if (user.isActive) {
-        if (user.role === "OWNER") {
-          navigate("/owner");
-        } else if (user.role === "FREELANCER") {
-          navigate("/fre");
-        }
-      } else {
-        navigate("/complete-profile");
+      if (!user.isActive) return navigate("/complete-profile");
+      if (user.status !== 2) {
+        navigate("/");
+        toast("پروفایل شما در انتظار تایید است", { icon: "👏" });
+        return;
       }
+      if (user.role === "OWNER") return navigate("/owner");
+      if (user.role === "FREELANCER") return navigate("/freelancer");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -91,9 +91,15 @@ function CheckOTPForm({ phoneNumber, onBack, onReSendOtp, otpResponse }) {
             borderRadius: "0.5rem",
           }}
         />
-        <button className="btn btn--primary w-full" type="submit">
-          تایید
-        </button>
+        <div>
+          {isPending ? (
+            <Loading />
+          ) : (
+            <button type="submit" className="btn btn--primary w-full">
+              تایید
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
