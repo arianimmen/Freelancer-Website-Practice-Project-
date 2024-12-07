@@ -37,56 +37,58 @@ function CompleteProfileForm() {
   };
 
   return (
-    <div className="flex justify-center pt-10">
-      <div className="w-full sm:max-w-sm">
-        <form className="space-y-8" onSubmit={handleSubmit}>
-          <TextField
-            label={"نام و نام خانوادگی "}
-            name={"name"}
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-          />
-          <TextField
-            label={"ایمیل"}
-            name={"email"}
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-          <div className="flex items-center justify-center gap-x-8">
-            <div className="flex items-center gap-x-2 text-secondary-600">
-              <RadioInput
-                name="role"
-                value="OWNER"
-                id="OWNER"
-                label="کارفرما"
-                onChange={(e) => {
-                  setRole(e.target.value);
-                }}
-                checked={role === "OWNER"}
-              />
+    <div className="container xl:max-w-screen-xl">
+      <div className="flex justify-center pt-10">
+        <div className="w-full sm:max-w-sm">
+          <form className="space-y-8" onSubmit={handleSubmit}>
+            <TextField
+              label={"نام و نام خانوادگی "}
+              name={"name"}
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
+            <TextField
+              label={"ایمیل"}
+              name={"email"}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+            <div className="flex items-center justify-center gap-x-8">
+              <div className="flex items-center gap-x-2 text-secondary-600">
+                <RadioInput
+                  name="role"
+                  value="OWNER"
+                  id="OWNER"
+                  label="کارفرما"
+                  onChange={(e) => {
+                    setRole(e.target.value);
+                  }}
+                  checked={role === "OWNER"}
+                />
 
-              <RadioInput
-                name="role"
-                value="FREELANCER"
-                id="FREELANCER"
-                label="فریلنسر"
-                onChange={(e) => {
-                  setRole(e.target.value);
-                }}
-                checked={role === "FREELANCER"}
-              />
+                <RadioInput
+                  name="role"
+                  value="FREELANCER"
+                  id="FREELANCER"
+                  label="فریلنسر"
+                  onChange={(e) => {
+                    setRole(e.target.value);
+                  }}
+                  checked={role === "FREELANCER"}
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            {isPending ? (
-              <Loading />
-            ) : (
-              <button type="submit" className="btn btn--primary w-full">
-                تایید
-              </button>
-            )}
-          </div>
-        </form>
+            <div>
+              {isPending ? (
+                <Loading />
+              ) : (
+                <button type="submit" className="btn btn--primary w-full">
+                  تایید
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

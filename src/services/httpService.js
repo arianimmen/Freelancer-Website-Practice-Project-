@@ -4,7 +4,7 @@ const BASE_URL = "http://localhost:5000/api";
 
 const app = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true,
+  withCredentials: true, 
 });
 
 app.interceptors.request.use(
