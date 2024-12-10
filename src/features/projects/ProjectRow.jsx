@@ -14,6 +14,8 @@ function ProjectRow({ index, project }) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const { isDeleting, removeProject } = useRemoveProject();
+
+  
   
   return (
     <Table.Row>
