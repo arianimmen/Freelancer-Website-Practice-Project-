@@ -4,16 +4,22 @@ import { useMutation } from "@tanstack/react-query";
 import { getOTP } from "../../services/authService";
 import toast from "react-hot-toast";
 import Loading from "../../ui/Loading";
+import { useForm } from "react-hook-form";
 
-function SendOTPForm({ onSubmit, onChange, phoneNumber, isSendingOtp }) {
+function SendOTPForm({ onSubmit, isSendingOtp, register, errors }) {
   return (
     <div>
       <form className="space-y-8" onSubmit={onSubmit}>
         <TextField
-          onChange={onChange}
           label="شماره موبایل"
-          value={phoneNumber}
           name="phoneNumber"
+          required
+          register={register}
+          validationSchema={{
+            required: "شماره موبایل الزامی است",
+          }}
+          type="number"
+          errors={errors}
         />
 
         <div>

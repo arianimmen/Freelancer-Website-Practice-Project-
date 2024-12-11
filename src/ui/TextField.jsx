@@ -1,4 +1,5 @@
 function TextField({
+  dir = "ltr",
   label,
   name,
   register,
@@ -13,7 +14,7 @@ function TextField({
         {label} {required && <span className="text-error">*</span>}
       </label>
       <input
-        dir="ltr"
+        dir={dir}
         {...register(name, validationSchema)}
         id={name}
         className="textField__input"
