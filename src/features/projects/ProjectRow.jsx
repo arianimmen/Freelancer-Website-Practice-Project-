@@ -8,6 +8,8 @@ import Modal from "../../ui/Modal";
 import { useState } from "react";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useRemoveProject from "./useRemoveProject";
+import CreateProjectForm from "./CreateProjectForm";
+import ToggleProjectStatus from "./ToggleProjectStatus";
 
 function ProjectRow({ index, project }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -15,8 +17,6 @@ function ProjectRow({ index, project }) {
 
   const { isDeleting, removeProject } = useRemoveProject();
 
-  
-  
   return (
     <Table.Row>
       <td>{index + 1}</td>
@@ -35,11 +35,8 @@ function ProjectRow({ index, project }) {
       </td>
       <td>{project.freelancdr?.name || "-"}</td>
       <td>
-        {project.status === "OPEN" ? (
-          <span className="badge badge--success">باز</span>
-        ) : (
-          <span className="badge badge--danger">بسته</span>
-        )}
+        <ToggleProjectStatus project={project} />
+
       </td>
       <td>
         <div className="flex items-center gap-x-4">
@@ -51,7 +48,10 @@ function ProjectRow({ index, project }) {
             title={`ویرایش ${project.title}`}
             onClose={() => setIsEditOpen(false)}
           >
-            This is modal
+            <CreateProjectForm
+              onClose={() => setIsEditOpen(false)}
+              projectToEdit={project}
+            />
           </Modal>
           <button onClick={() => setIsDeleteOpen((prev) => !prev)}>
             <HiOutlineTrash className="w-5 h-5 text-error" />

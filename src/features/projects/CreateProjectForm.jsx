@@ -5,21 +5,72 @@ import { TagsInput } from "react-tag-input-component";
 import { useState } from "react";
 import DatePickerField from "../../ui/DatePickerField";
 import useCategories from "../../hooks/useCategories";
-function CreateProjectForm() {
+import useCreateProject from "./useCreateProject";
+import Loading from "../../ui/Loading";
+import useEditProject from "./UseEditProjects";
+function CreateProjectForm({ onClose, projectToEdit = {} }) {
+  const { _id: editId } = projectToEdit;
+  const isEditSession = Boolean(editId);
+
+  let editValues = {};
+  const {
+    description,
+    title,
+    budget,
+    deadline,
+    category,
+    tags: prevTags,
+  } = projectToEdit;
+
+  if (isEditSession) {
+    editValues = {
+      description,
+      title,
+      budget,
+      category: category._id,
+    };
+  }
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+    reset,
+  } = useForm({ defaultValues: editValues });
 
-  const [tags, setTags] = useState([]);
-  const [date, setDate] = useState(new Date());
+  const [tags, setTags] = useState(prevTags || []);
+  const [date, setDate] = useState(deadline || new Date());
+  const { createProject, isCreating } = useCreateProject();
+  const { editProject } = useEditProject();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const newProject = {
+      ...data,
+      deadline: new Date(date).toISOString(),
+      tags,
+    };
+
+    if (isEditSession) {
+      editProject(
+        { newProject, id: editId },
+        {
+          onSuccess: () => {
+            onClose();
+            reset;
+          },
+        }
+      );
+    } else {
+      createProject(newProject, {
+        onSuccess: () => {
+          onClose();
+          reset;
+        },
+      });
+    }
   };
 
-  const { categories, isLoading } = useCategories();
+  const { categories } = useCategories();
 
   return (
     <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
@@ -63,11 +114,11 @@ function CreateProjectForm() {
         errors={errors}
       />
       <RHFSelect
-        register={register}
         label="دسته بندی"
+        required
         name="category"
+        register={register}
         options={categories}
-        requierd
       />
 
       <div>
@@ -77,9 +128,15 @@ function CreateProjectForm() {
 
       <DatePickerField label="ددلاین" date={date} setDate={setDate} />
 
-      <button className="btn btn--primary w-full" type="submit">
-        تایید
-      </button>
+      <div className="mt-8">
+        {isCreating ? (
+          <Loading />
+        ) : (
+          <button className="btn btn--primary w-full" type="submit">
+            تایید
+          </button>
+        )}
+      </div>
     </form>
   );
 }
