@@ -1,4 +1,4 @@
-import { HiOutlineTrash } from "react-icons/hi";
+import { HiEye, HiOutlineTrash } from "react-icons/hi";
 import Table from "../../ui/Table";
 import toLocalDateShort from "../../utils/toLocalDateShort";
 import toPersianNumbersWithComma from "../../utils/toPersianNumbers";
@@ -10,12 +10,13 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 import useRemoveProject from "./useRemoveProject";
 import CreateProjectForm from "./CreateProjectForm";
 import ToggleProjectStatus from "./ToggleProjectStatus";
+import { Link } from "react-router-dom";
 
 function ProjectRow({ index, project }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  const { isDeleting, removeProject } = useRemoveProject();
+  const { removeProject } = useRemoveProject();
 
   return (
     <Table.Row>
@@ -36,7 +37,6 @@ function ProjectRow({ index, project }) {
       <td>{project.freelancdr?.name || "-"}</td>
       <td>
         <ToggleProjectStatus project={project} />
-
       </td>
       <td>
         <div className="flex items-center gap-x-4">
@@ -73,6 +73,11 @@ function ProjectRow({ index, project }) {
             />
           </Modal>
         </div>
+      </td>
+      <td>
+        <Link to={project._id} className="flex justify-center">
+          <HiEye className="w-5 h-5 text-primary-800" />
+        </Link>
       </td>
     </Table.Row>
   );
