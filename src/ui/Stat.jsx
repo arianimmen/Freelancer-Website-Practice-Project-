@@ -9,7 +9,7 @@ function Stat({ icon, value, title, color }) {
     <div className="flex flex-wrap items-center flex-col md:flex-row  bg-secondary-200 p-4 rounded-lg gap-x-4 justify-center md:justify-start">
       <div
         className={`row-span-2 flex items-center justify-center p-2 aspect-square rounded-full 
-      ${colors[color]}`}
+        ${colors[color]}`}
       >
         {icon}
       </div>
