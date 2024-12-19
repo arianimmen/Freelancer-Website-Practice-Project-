@@ -1,5 +1,5 @@
 import http from "./httpService";
-export default function changeProposalStatusApi({ proposalId, data }) {
+export default function changeProposalStatusApi({ proposalId, ...data }) {
   return http
     .patch(`/proposal/${proposalId}`, data)
     .then(({ data }) => data.data);
