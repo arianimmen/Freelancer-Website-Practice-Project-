@@ -17,9 +17,10 @@ function TextField({
         dir={dir}
         {...register(name, validationSchema)}
         id={name}
-        className="textField__input"
+        className="textField__input bg-secondary-100 focus:bg-secondary-100"
         type={type}
         autoComplete="off"
+
       />
       {errors && errors[name] && (
         <span className="block text-error text-sm mt-2">

@@ -5,7 +5,6 @@ import { Toaster } from "react-hot-toast";
 import CompleteProfile from "./pages/CompleteProfile";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
-import AppLayout from "./ui/AppLayout";
 import OwnerDashboard from "./pages/OwnerDashboard";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
@@ -14,6 +13,7 @@ import OwnerLayout from "./features/owner/OwnerLayout";
 import FreelancerDashboard from "./pages/FreelancerDashboard";
 import Proposals from "./pages/Proposals";
 import FreelancerLayout from "./features/freelancer/FreelancerLayout";
+import SubmittedProjects from "./pages/SubmittedProjects";
 
 const queryClient = new QueryClient();
 
@@ -37,7 +37,7 @@ function App() {
             <Route index element={<Navigate to={"dashboard"} replace />} />
             <Route path="dashboard" element={<FreelancerDashboard />} />
             <Route path="proposals" element={<Proposals />} />
-            <Route path="projects" element={<submittedProjects />} />
+            <Route path="projects" element={<SubmittedProjects />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
