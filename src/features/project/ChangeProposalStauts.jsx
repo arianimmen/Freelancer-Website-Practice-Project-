@@ -28,7 +28,7 @@ function ChangeProposalStauts({ proposalId, onClose }) {
 
   const onSubmit = (data) => {
     changeProposalStatus(
-      { proposalId, projectId, data },
+      { proposalId, projectId, ...data },
       {
         onSuccess: () => {
           onClose();
